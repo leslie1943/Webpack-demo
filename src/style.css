@@ -1,0 +1,11 @@
+body{
+  /* height: 200px; */
+  /* width: 300px; */
+  text-align: center;
+  background: rgb(42, 41, 43);
+  color:wheat;
+}
+
+h2{
+  cursor: pointer;
+}
