@@ -1,8 +1,8 @@
 class RemoveCommentsPlugin {
   apply(compiler) {
     // console.info('compiler', compiler)
-    console.info('compiler.hooks', compiler.hooks)
-    console.info('RemoveCommentsPlugin??')
+    // console.info('compiler.hooks', compiler.hooks)
+    // console.info('RemoveCommentsPlugin??')
     // compiler包含我们此次构建的所有信息的配置
 
     // 1：通过compiler对象的hooks属性访问到emit钩子

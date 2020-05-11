@@ -4,6 +4,9 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const RemoveCommentsPlugin = require('../remove-comments-plugin')
+const setting = require('./setting')
+
+console.info('__dirname', __dirname)
 const config = {
   mode: 'none',
   entry: './src/main',
@@ -33,10 +36,26 @@ const config = {
       {
         test: /\.(png|svg|jpg|gif)$/,
         use: ['file-loader']
+      },
+      // 字体
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        use: ['file-loader']
+      },
+      // 数据文件
+      {
+        test: /\.(csv|tsv)$/,
+        use: ['csv-loader']
+      },
+      {
+        test: /\.(xml)$/,
+        use: ['xml-loader']
       }
     ],
-
   },
+  // devServer: {
+  //   contentBase: false,
+  // },
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
@@ -46,10 +65,13 @@ const config = {
     new HtmlWebpackPlugin({
       filename: 'about.html'
     }),
-    new CopyWebpackPlugin([
-      'public' // 需要copy的目录或者路径
-    ]),
-    new RemoveCommentsPlugin()
+    // 位置很重要,如果放到最后会报错
+    new RemoveCommentsPlugin(),
+    // __dirname >>>>>> C:\Leslie\Web_learning\Webpack-demo\config
+    new CopyWebpackPlugin([{
+      from: path.resolve(__dirname, '../public'), // 相对路径一定要正确
+      to: path.resolve(__dirname, `../dist/${setting.dev.assetsSubDirectory}`),
+    }]),
   ]
 }
 module.exports = config

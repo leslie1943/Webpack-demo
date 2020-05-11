@@ -1,9 +1,9 @@
 // markdown loader demo
-import Icon from '../assets/image/react.jpg'
+import Icon from './assets/image/webpack.svg'
 import _ from 'lodash'
 function component() {
   var element = document.createElement('div')
-  element.innerHTML = _.join(['Hello', 'Image'], ' ')
+  // element.innerHTML = _.join(['Hello', 'Image'], ' ')
   var myIcon = new Image()
   myIcon.src = Icon
   element.appendChild(myIcon)

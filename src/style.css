@@ -10,6 +10,18 @@ h2{
   cursor: pointer;
 }
 img{
-  height: 40px;
-  width: 40px;
+  text-align: center;
+  height: 100%;
+  width: 200px;
+}
+@font-face{
+  font-family: 'customer-font';
+  src:url('./assets/font/iconfont.woff'),
+  url('./assets/font/iconfont.ttf'),
+  url('./assets/font/iconfont.woff2');
+  font-size:'36px'
+}
+.hello{
+  color: greenyellow;
+  font-family: 'customer-font';
 }

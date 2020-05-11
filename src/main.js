@@ -6,10 +6,12 @@ import './style.css'
 
 // markdown loader demo
 import about from './about.md'
-// 字体
-import '../assets/font/iconfont'
-
 console.info(about)
+
+// 字体
+import './assets/font/iconfont'
+import Data from './data/data.xml'
+console.info('Data', Data)
 
 // biz logic
 const heading = createHeading()
