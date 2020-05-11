@@ -3,10 +3,10 @@ const path = require('path') // node内置模块
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const RemoveCommentsPlugin = require('./remove-comments-plugin')
+const RemoveCommentsPlugin = require('../remove-comments-plugin')
 const config = {
   mode: 'none',
-  entry: './src/main.js',
+  entry: './src/main',
   output: {
     // filename: 'bundle.js',
     filename: '[name].[chunkhash].js'
@@ -28,6 +28,11 @@ const config = {
       {
         test: /\.epro$/,
         use: ['html-loader', './epro-loader']
+      },
+      // 图片
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: ['file-loader']
       }
     ],
 
