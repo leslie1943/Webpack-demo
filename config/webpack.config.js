@@ -17,6 +17,21 @@ const config = {
     filename: '[name].[chunkhash].js'
     // path: path.join(__dirname, 'output')
   },
+  devServer: {
+    /**
+     * contentBase 属性指定额外的静态资源路径.
+     * contentBase 属性可以是一个字符串或者数组,也就是说你可以配置一个或者多个路径
+     */
+    contentBase: '../static',
+    // 代理
+    proxy: {
+      '/api': {
+        target: 'https://api.github.com',
+        pathRewrite: { '^/api': '' }, // 替换掉代理地址中的 /api
+        changeOrigin: true // 确保请求 GitHub 的主机名就是：api.github.com
+      }
+    }
+  },
   module: {
     rules: [
       {
@@ -72,7 +87,7 @@ const config = {
     new RemoveCommentsPlugin(),
     // __dirname >>>>>> C:\Leslie\Web_learning\Webpack-demo\config
     new CopyWebpackPlugin([{
-      from: path.resolve(__dirname, '../public'), // 相对路径一定要正确
+      from: path.resolve(__dirname, '../static'), // 相对路径一定要正确
       to: path.resolve(__dirname, `../dist/${setting.dev.assetsSubDirectory}`),
     }]),
     new CheckSensitivePlugin(),
