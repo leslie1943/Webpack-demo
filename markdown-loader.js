@@ -2,7 +2,7 @@ const marked = require('marked')
 module.exports = source => {
   // 加载到的文件 # About \n\nthis is a markdown file
   // console.info(' 原始的 ####【markdown-loader】print load content start ####')
-  console.info(source)
+  // console.info(source)
   // console.info(' 原始的 ####【markdown-loader】print load content finish ####')
   // console.info(' ')
   // console.info('------------------------------------------------------------')

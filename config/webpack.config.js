@@ -3,10 +3,12 @@ const path = require('path') // node内置模块
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const RemoveCommentsPlugin = require('../remove-comments-plugin')
+const RemoveCommentsPlugin = require('../custom-plugins/remove-comments-plugin')
+const CheckSensitivePlugin = require('../custom-plugins/check-sensitive-plugin')
+const CountModulePlugin = require('../custom-plugins/count-module-plugin')
 const setting = require('./setting')
 
-console.info('__dirname', __dirname)
+console.info('【Log: __dirname】', __dirname)
 const config = {
   mode: 'none',
   entry: './src/main',
@@ -65,6 +67,7 @@ const config = {
     new HtmlWebpackPlugin({
       filename: 'about.html'
     }),
+    new CountModulePlugin(),
     // 位置很重要,如果放到最后会报错
     new RemoveCommentsPlugin(),
     // __dirname >>>>>> C:\Leslie\Web_learning\Webpack-demo\config
@@ -72,6 +75,7 @@ const config = {
       from: path.resolve(__dirname, '../public'), // 相对路径一定要正确
       to: path.resolve(__dirname, `../dist/${setting.dev.assetsSubDirectory}`),
     }]),
+    new CheckSensitivePlugin(),
   ]
 }
 module.exports = config
