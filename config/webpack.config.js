@@ -8,7 +8,9 @@ const CheckSensitivePlugin = require('../custom-plugins/check-sensitive-plugin')
 const CountModulePlugin = require('../custom-plugins/count-module-plugin')
 const setting = require('./setting')
 
-console.info('【Log: __dirname】', __dirname)
+// console.info('【Log: __dirname】', __dirname) // C:\Leslie\Web_learning\Webpack-demo\config
+// console.info(path.join(__dirname, '/static')) // C:\Leslie\Web_learning\Webpack-demo\config\static
+// console.info(path.join(__dirname, '../static')) // C:\Leslie\Web_learning\Webpack-demo\static
 const config = {
   mode: 'none',
   entry: './src/main',
@@ -17,12 +19,13 @@ const config = {
     filename: '[name].[chunkhash].js'
     // path: path.join(__dirname, 'output')
   },
+  // devServer:只在development下生效
   devServer: {
     /**
      * contentBase 属性指定额外的静态资源路径.
      * contentBase 属性可以是一个字符串或者数组,也就是说你可以配置一个或者多个路径
      */
-    contentBase: '../static',
+    // contentBase: 'static/',
     // 代理
     proxy: {
       '/api': {
