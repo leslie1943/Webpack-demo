@@ -6,6 +6,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const RemoveCommentsPlugin = require('../custom-plugins/remove-comments-plugin')
 const CheckSensitivePlugin = require('../custom-plugins/check-sensitive-plugin')
 const CountModulePlugin = require('../custom-plugins/count-module-plugin')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const setting = require('./setting')
 
 // console.info('【Log: __dirname】', __dirname) // C:\Leslie\Web_learning\Webpack-demo\config
@@ -15,8 +16,8 @@ const config = {
   mode: 'none',
   entry: './src/main',
   output: {
-    // filename: 'bundle.js',
-    filename: '[name].[chunkhash].js'
+    filename: 'bundle.js',
+    // filename: '[name].[chunkhash].js'
     // path: path.join(__dirname, 'output')
   },
   // devServer:只在development下生效
@@ -35,6 +36,8 @@ const config = {
       }
     }
   },
+  // devtool: 'source-map',
+  devtool: 'eval',
   module: {
     rules: [
       {
@@ -70,14 +73,15 @@ const config = {
       {
         test: /\.(xml)$/,
         use: ['xml-loader']
+      },
+      {
+        test: /\.vue$/,
+        use: ['vue-loader']
       }
     ],
   },
-  // devServer: {
-  //   contentBase: false,
-  // },
   plugins: [
-    new CleanWebpackPlugin(),
+    // new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: 'Webpack Plugin Sample',
       template: './src/index.html'
@@ -94,6 +98,7 @@ const config = {
       to: path.resolve(__dirname, `../dist/${setting.dev.assetsSubDirectory}`),
     }]),
     new CheckSensitivePlugin(),
+    new VueLoaderPlugin()
   ]
 }
 module.exports = config

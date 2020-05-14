@@ -5,6 +5,8 @@ class CountModulePlugin {
   apply(compiler) {
     compiler.hooks.afterCompile.tap('CountModulePlugin', compilation => {
       const files = compilation.fileDependencies
+      // const files = compilation // for attrative
+      // console.info(files)
       let total = 0
       let jsCounter = 0
       let mdCounter = 0

@@ -2,6 +2,8 @@
 import about from './about.md'
 console.info(about)
 
+// console.log1('heading')
+
 export default () => {
   const element = document.createElement('h2')
   element.textContent = 'Hello Leslie ' + '1943'
