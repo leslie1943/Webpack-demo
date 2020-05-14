@@ -1,4 +1,5 @@
 const path = require('path') // node内置模块
+const webpack = require('webpack')
 // import { Configuration } from 'webpack' // 完成配置后注释掉
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -34,7 +35,16 @@ const config = {
         pathRewrite: { '^/api': '' }, // 替换掉代理地址中的 /api
         changeOrigin: true // 确保请求 GitHub 的主机名就是：api.github.com
       }
-    }
+    },
+    // --------------------------- HMR ---------------------------
+    /**
+     * hot 和 hotOnly 的区别是在某些模块不支持热更新的情况下
+     * hot 会自动刷新页面
+     * 后hotOnly不会刷新页面,而是在控制台输出热更新失败(不会fallback到live reloading)
+     */
+    hot: true,
+    // hotOnly: true
+
   },
   // devtool: 'source-map',
   devtool: 'eval',
@@ -98,7 +108,9 @@ const config = {
       to: path.resolve(__dirname, `../dist/${setting.dev.assetsSubDirectory}`),
     }]),
     new CheckSensitivePlugin(),
-    new VueLoaderPlugin()
+    new VueLoaderPlugin(),
+    // HMR特性所需要的插件
+    new webpack.HotModuleReplacementPlugin()
   ]
 }
 module.exports = config
